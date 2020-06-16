@@ -1,0 +1,89 @@
+package ${package.Service};
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
+
+import com.ying.sql.vo.req.Add${entity}Req;
+import com.ying.sql.vo.req.Update${entity}Req;
+import com.ying.sql.vo.req.List${entity}Req;
+import com.ying.sql.vo.req.Page${entity}Req;
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+import ${package.Entity}.${entity};
+import org.jangod.iweb.core.bean.ResultList;
+import org.jangod.iweb.util.ResultUtil;
+import org.jangod.iweb.core.bean.Result;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+import java.util.List;
+
+import java.util.Date;
+
+import ${superServiceClassPackage};
+
+/**
+ * <p>
+ * ${entity}服务类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Service
+public class ${table.serviceName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}>  {
+
+public Result list(List${entity}Req req)throws Exception{
+        String keyword=req.getKeyword();
+        QueryWrapper<${entity}> queryWrapper=new QueryWrapper<>();
+        if(!StringUtils.isEmpty(keyword)){
+        queryWrapper.like("",req.getKeyword());
+        }
+        return ResultUtil.successToList(baseMapper.selectList(queryWrapper));
+        }
+
+public Result page(Page${entity}Req req)throws Exception{
+        String keyword=req.getKeyword();
+        QueryWrapper<${entity}> queryWrapper=new QueryWrapper<>();
+        if(!StringUtils.isEmpty(keyword)){
+        queryWrapper.like("",keyword);
+        }
+        return ResultUtil.success();
+        }
+
+public Result add(Add${entity}Req req)throws Exception{
+    ${entity} successToList=new  ${entity}();
+        BeanUtils.copyProperties(req,successToList);
+    #foreach($field in ${table.fields})
+        #if(${field.propertyName.equals("createTime")})
+                successToList.set${field.capitalName}(new Date());
+        #end
+    #end
+        baseMapper.insert(successToList);
+        return ResultUtil.success();
+        }
+
+public Result modify(Update${entity}Req req)throws Exception{
+    ${entity} successToList=new  ${entity}();
+        BeanUtils.copyProperties(req,successToList);
+    #foreach($field in ${table.fields})
+        #if(${field.propertyName.equals("updateTime")} || ${field.propertyName.equals("modifyTime")})
+                successToList.set${field.capitalName}(new Date());
+        #end
+    #end
+        baseMapper.updateById(successToList);
+        return ResultUtil.successToObject(Boolean.TRUE);
+        }
+
+public Result delete(#foreach($field in ${table.fields})#if(${field.keyFlag})${field.propertyType} ${field.propertyName}#end#end)throws Exception{
+        baseMapper.deleteById("1");
+        return ResultUtil.successToObject(Boolean.TRUE);
+        }
+
+public Result get()throws Exception{
+        return ResultUtil.successToObject(baseMapper.selectById("1"));
+        }
+        }
