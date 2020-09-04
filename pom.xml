@@ -23,8 +23,9 @@
     </properties>
     <modules>
         <module>wink-summer</module>
-        <module>wink-console</module>
+       <!-- <module>wink-console</module>-->
         <module>wink-common</module>
+        <module>wink-startup</module>
     </modules>
     <dependencies>
         <dependency>
