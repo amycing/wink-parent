@@ -11,9 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = StartupApplication.class)
 public class DemoApplicationTests {
-
-
-
     @Autowired
     private WinkUserMapper winkUserMapper;
     @Test
@@ -21,8 +18,4 @@ public class DemoApplicationTests {
         System.out.println(winkUserMapper.selectById("1"));
     }
 
-    public void getBookById()
-        {
-            System.out.println(winkUserMapper.selectById("1"));
-        }
 }
