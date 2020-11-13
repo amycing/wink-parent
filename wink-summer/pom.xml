@@ -14,11 +14,11 @@
   <url>http://maven.apache.org</url>
 
   <dependencies>
-    <dependency>
+   <!-- <dependency>
       <groupId>com.ying.summer</groupId>
       <artifactId>wink-common</artifactId>
       <version>${project.version}</version>
-    </dependency>
+    </dependency>-->
   </dependencies>
   <build>
     <finalName>wink-summer</finalName>

@@ -24,8 +24,8 @@
     <modules>
         <module>wink-summer</module>
        <!-- <module>wink-console</module>-->
-        <module>wink-common</module>
-        <module>wink-startup</module>
+       <!-- <module>wink-common</module>-->
+      <!--  <module>wink-startup</module>-->
     </modules>
     <dependencies>
         <dependency>
@@ -127,6 +127,11 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.1.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.java-websocket</groupId>
+            <artifactId>Java-WebSocket</artifactId>
+            <version>1.4.0</version>
         </dependency>
     </dependencies>
     <build>
